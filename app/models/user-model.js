@@ -30,21 +30,15 @@ module.exports = (mongoose, models)=>{
       type: Date,
       required: true;
     },
-    userBio:  String,
-    userCar: {
-      type: String,
-
-    }
+    userBio: String,
+    userCar: String,
     userReviews: [{
       type: Schema.Types.ObjectId,
       ref: 'Review'
     }
   ],
   userUpdated: {type: Date, default: dateFormat("dddd, mmmm dS, yyyy, h:MM:ss TT")},
-
-
-  });
-
+});
 
 userSchema.methods.hashPassword = function(password){
   var hash = this.authentication.password = bcrypt.hashSync(password, bcrypt.genSaltSync(8));
