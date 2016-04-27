@@ -41,7 +41,7 @@ module.exports = (mongoose, models)=>{
 });
 
 userSchema.methods.hashPassword = function(password){
-  var hash = this.authentication.password = bcrypt.hashSync(password, bcrypt.genSaltSync(8));
+  var hash = this.authentication.password = bcrypt.hashSync(password, 8);
   return hash;
 };
 
@@ -49,7 +49,7 @@ userSchema.methods.comparePassword = function(password){
   return bcrypt.compareSync(password, this.authentication.password);
 };
 userSchema.methods.generateToken = function(){
-  return jwt.sign({id: this._id}, config.secret);
+  return jwt.sign({id: this._id}, process.env.APP_SECRET || 'funtimes');
 };
 
   let User = mongoose.model('User', UserSchema);
